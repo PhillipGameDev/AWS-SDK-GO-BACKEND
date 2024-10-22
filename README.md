@@ -1,4 +1,4 @@
-# aws-sdk-go-base
+# aws-sdk-go-backend
 
 An opinionated [AWS SDK for Go v2](https://github.com/aws/aws-sdk-go-v2) library for consistent authentication configuration between projects plus additional helper functions. This library was originally started in [HashiCorp Terraform](https://github.com/hashicorp/terraform), migrated with the [Terraform AWS Provider](https://github.com/terraform-providers/terraform-provider-aws) during the Terraform 0.10 Core and Provider split, and now is offered as a separate library to allow easier dependency management in the Terraform ecosystem.
 
@@ -7,9 +7,9 @@ the [Terraform S3 Backend](https://www.terraform.io/docs/backends/types/s3.html)
 the [Terraform AWS Provider](https://www.terraform.io/docs/providers/aws),
 and the [Terraform AWS Cloud Control Provider](https://registry.terraform.io/providers/hashicorp/awscc).
 
-This project publishes two Go modules, `aws-sdk-go-base/v2` and `aws-sdk-go-base/v2/awsv1shim/v2`.
-The module `aws-sdk-go-base/v2` returns configuration compatible with the [AWS SDK for Go v2](https://github.com/aws/aws-sdk-go-v2).
-In order to assist with migrating large code bases using the AWS SDK for Go v1, the module `aws-sdk-go-base/v2/awsv1shim/v2` takes the AWS SDK for Go v2 configuration and returns configuration for the AWS SDK for Go v1.
+This project publishes two Go modules, `aws-sdk-go-backend/v2` and `aws-sdk-go-backend/v2/awsv1shim/v2`.
+The module `aws-sdk-go-backend/v2` returns configuration compatible with the [AWS SDK for Go v2](https://github.com/aws/aws-sdk-go-v2).
+In order to assist with migrating large code bases using the AWS SDK for Go v1, the module `aws-sdk-go-backend/v2/awsv1shim/v2` takes the AWS SDK for Go v2 configuration and returns configuration for the AWS SDK for Go v1.
 
 ## Requirements
 
@@ -17,7 +17,7 @@ In order to assist with migrating large code bases using the AWS SDK for Go v1, 
 
 ## Development
 
-Running `make test` will test both `aws-sdk-go-base/v2` and `aws-sdk-go-base/v2/awsv1shim/v2`.
+Running `make test` will test both `aws-sdk-go-backend/v2` and `aws-sdk-go-base/v2/awsv1shim/v2`.
 To test individual cases, `go test` works as well, but be aware that it only works in the current module.
 To test both modules, run:
 
@@ -49,21 +49,21 @@ $ cd v2/awsv1shim && golangci-lint run ./...
 ## Release Process
 
 The two modules can be released separately.
-If changes are only made to `awsv1shim`, `aws-sdk-go-base` should **not** be released.
-However, if changes are made to `aws-sdk-go-base`, both modules should be released.
+If changes are only made to `awsv1shim`, `aws-sdk-go-backend` should **not** be released.
+However, if changes are made to `aws-sdk-go-backend`, both modules should be released.
 
-1. If creating a new release of `aws-sdk-go-base`
+1. If creating a new release of `aws-sdk-go-backend`
     1. Update the reference in the `awsv1shim` `go.mod` file
     1. Run `go mod tidy`
 1. Update the CHANGELOG.md file
 1. Push the updated files to GitHub
 1. Push new version tags to GitHub. For more details on Go module versioning, see <https://go.dev/doc/modules/version-numbers>. (Commands `git tag -a -m "" <version tag>`, `git push --tags`)
-    * For `aws-sdk-go-base`, use the form `vX.Y.Z`
+    * For `aws-sdk-go-backend`, use the form `vX.Y.Z`
     * For `awsv1shim`, use the form `v2/awsv1shim/vX.Y.Z`
 1. Close the associated GitHub milestone
 1. Create the releases on GitHub
 
 ## AWS SDK Upgrade Policy
 
-`aws-sdk-go-base` will only upgrade AWS SDKs as needed to bring in bug fixes or required enhancements.
+`aws-sdk-go-backend` will only upgrade AWS SDKs as needed to bring in bug fixes or required enhancements.
 This leaves software making use of this module free to manage their own SDK versions.
